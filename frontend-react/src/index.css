@@ -1,0 +1,103 @@
+:root {
+  --primary-color: #2a2a30;
+  --secondary-color: #3a3a40;
+  --detail-color: #00b1ff;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body,
+html,
+#root {
+  width: 100%;
+  height: 100%;
+  font-size: 18px;
+  background: var(--primary-color);
+  font-family: sans-serif;
+}
+
+h1 {
+  font-size: 1.2rem;
+  color: #efefff;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+h2 {
+  font-size: .9rem;
+  color: #cacad0;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+li {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  background: var(--detail-color);
+  font-size: .7rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  padding: .3rem .5rem;
+  border-radius: .3rem;
+  border: 2px solid var(--detail-color);
+  outline: 0;
+  width: 100%;
+  color: rgba(0, 0, 0, .5);
+  transition: .3s ease;
+}
+
+button:hover {
+  background: transparent;
+  color: var(--detail-color);
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* Board */
+
+.board ul {
+  display: grid;
+  grid-template-columns: repeat(3, 50px);
+  gap: .7rem;
+  margin-top: 1rem;
+}
+
+/* Square  */
+
+.square {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--secondary-color);
+  width: 50px;
+  height: 50px;
+  border-radius: .2rem;
+  border: 1px solid rgba(255, 255, 255, .1);
+  color: cyan;
+  font-size: .8rem;
+  font-weight: bold;
+  transition: .3s;
+}
+
+.square:hover {
+  background: rgba(255, 255, 255, .2);
+}
+
+.square.winner {
+  background: rgba(0, 177, 255, .6);
+  color: #ffffff;
+}
