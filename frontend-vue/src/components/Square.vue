@@ -1,10 +1,16 @@
 <template>
-  <h1>Square</h1>
+  <li 
+    :class="['square', { 'winner': winner }]" 
+    @click="handleSquare"
+  >
+    {{value}}
+  </li>
 </template>
 
 <script>
 export default {
-  name: "Square"
+  name: "Square",
+  props: ["value", "winner", "handleSquare"],
 };
 </script>
 
