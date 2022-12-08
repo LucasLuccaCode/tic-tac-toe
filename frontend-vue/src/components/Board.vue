@@ -2,11 +2,10 @@
   <div class="board">
     <ul>
       <Square 
-        v-for="(square, index) in state.squares"
+        v-for="(square, index) in squares"
         :key="index" 
         :value="square"
-        :handleSquare="() => handleSquare(index)"
-        :winner="state.winningSquares.includes(index)" 
+        :index="index"
       />
     </ul>
     <button @click="restartGame">Reiniciar jogo</button>
@@ -18,7 +17,16 @@ import Square from "./Square.vue"
 
 export default {
   name: "Board",
-  props: ["state", "handleSquare", "restartGame"],
+  methods: {
+    restartGame(){
+      this.$store.dispatch("restartGame")
+    }
+  },
+  computed: {
+    squares(){
+      return this.$store.state.squares
+    }
+  },
   components: {
     Square 
   }

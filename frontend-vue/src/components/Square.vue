@@ -1,7 +1,7 @@
 <template>
   <li 
-    :class="['square', { 'winner': winner }]" 
-    @click="handleSquare"
+    :class="['square', { 'winner': hasWinner }]" 
+    @click="handleClick"
   >
     {{value}}
   </li>
@@ -10,7 +10,17 @@
 <script>
 export default {
   name: "Square",
-  props: ["value", "winner", "handleSquare"],
+  props: ["value", "index"],
+  methods: {
+    handleClick(){
+      this.$store.dispatch("handleSquare", this.index)
+    }
+  },
+  computed: {
+    hasWinner(){
+      return this.$store.state.winningSquares.includes(this.index)
+    }
+  }
 };
 </script>
 
