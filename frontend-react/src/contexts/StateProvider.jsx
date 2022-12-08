@@ -18,12 +18,13 @@ export default function StateProvider({ children }) {
     const newSquares = squares.slice()
     newSquares[indexSquare] = isXNext ? "X" : "O"
     const newWinningSquares = checkWinner(newSquares) || []
+    const allSquaresFilled = !newSquares.includes(null)
 
     setState({
       squares: newSquares,
       winningSquares: newWinningSquares,
       isXNext: !state.isXNext,
-      endGame: newWinningSquares.length ? true : false
+      endGame: allSquaresFilled || Boolean(newWinningSquares.length)
     })
   }, [state])
 
@@ -42,7 +43,7 @@ export default function StateProvider({ children }) {
 }
 
 function getMessage(state, setState) {
-  const { squares, winningSquares, isXNext, endGame } = state
+  const { squares, winningSquares, isXNext } = state
   const totalWinningSquares = winningSquares.length
   const allSquaresFilled = squares.every(value => value)
 
@@ -52,10 +53,8 @@ function getMessage(state, setState) {
   if (totalWinningSquares)
     return `Jogador ${squares[winningSquares[0]]} venceu...`
 
-  if (!totalWinningSquares && allSquaresFilled) {
-    !endGame && setState(prevState => ({ ...prevState, endGame: true }))
+  if (!totalWinningSquares && allSquaresFilled)
     return `Jogo terminou empatado...`
-  }
 }
 
 function checkWinner(squares) {

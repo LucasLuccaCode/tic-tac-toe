@@ -1,7 +1,7 @@
 <template>
   <div class="game">
     <h1>Tic Tac Toe</h1>
-    <h2>{{ $store.getters.msg }}</h2>
+    <h2>{{ msg }}</h2>
     <Board />
   </div>
 </template>
@@ -11,13 +11,10 @@ import Board from "@/components/Board.vue";
 
 export default {
   name: "App",
-  data() {
-    return {
-      
-    };
-  },
   computed: {
-    
+    msg(){
+      return this.$store.getters.msg
+    }
   },
   components: {
     Board,

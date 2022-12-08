@@ -33,7 +33,6 @@ export default createStore({
       state.winningSquares = winningSquares
       state.isXNext = isXNext
       state.endGame = endGame
-      console.log(squares, winningSquares)
     },
     resetState(state) {
       const { squares, winningSquares, isXNext, endGame } = initialStore
@@ -44,18 +43,19 @@ export default createStore({
     }
   },
   actions: {
-    async handleSquare({ state, commit, dispatch }, indexSquare) {
+    async handleSquare({ state, commit, getters, dispatch }, indexSquare) {
       const { squares, isXNext, endGame } = state;
       if (endGame) return;
       const newSquares = squares.slice();
       newSquares[indexSquare] = isXNext ? "X" : "O";
       const newWinningSquares = await dispatch("getSquaresWinner", newSquares);
+      const allSquaresFilled = !newSquares.includes(null)
 
       const newState = {
         squares: newSquares,
         winningSquares: newWinningSquares,
         isXNext: !isXNext,
-        endGame: Boolean(newWinningSquares.length)
+        endGame: allSquaresFilled || Boolean(newWinningSquares.length)
       };
       commit("setState", newState)
     },
