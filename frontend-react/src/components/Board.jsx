@@ -1,6 +1,10 @@
+import { useContext } from "react"
+import { StateContext } from "../contexts/StateProvider"
 import Square from "./Square"
 
-export default function Board({ state, handleSquare, restartGame }) {
+export default function Board() {
+  const { state, restartGame } = useContext(StateContext)
+
   return (
     <div className="board">
       <ul>
@@ -9,8 +13,7 @@ export default function Board({ state, handleSquare, restartGame }) {
             <Square
               key={index}
               value={square}
-              handleSquare={() => handleSquare(index)}
-              winner={state.winningSquares.includes(index)}
+              index={index}
             />)
         }
       </ul>
